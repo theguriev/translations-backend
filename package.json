@@ -1,12 +1,14 @@
 {
   "name": "translations-backend",
   "version": "1.0.0",
+  "author": "Eugen Guriev <gurievcreative@gmail.com>",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "preview:gateway": "pnpm --filter @services/gateway run preview",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "packageManager": "pnpm@8.6.11"
 }
