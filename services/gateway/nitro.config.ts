@@ -1,8 +1,10 @@
 //https://nitro.unjs.io/config
 export default defineNitroConfig({
   routeRules: {
-    "/authorization": {
-      proxy: "http://authorization:3000",
+    "/authorization/**": {
+      proxy: {
+        to: "http://authorization:3000/**",
+      },
     },
   },
 });

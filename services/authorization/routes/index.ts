@@ -1,3 +1,3 @@
 export default eventHandler(() => {
-  return { nitro: "Authorization hello" };
+  return { nitro: "Authorization hello2" };
 });

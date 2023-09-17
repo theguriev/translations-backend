@@ -7,6 +7,9 @@
     "preview": "node .output/server/index.mjs"
   },
   "dependencies": {
-    "nitropack": "latest"
+    "mongoose": "^7.5.2",
+    "mongoz": "^0.0.1",
+    "nitropack": "latest",
+    "zod": "^3.22.2"
   }
 }
