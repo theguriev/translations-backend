@@ -1,10 +1,6 @@
 import { z } from "zod";
-import { Schema, model } from "mongoose";
-
-const userSchema = new Schema({
-  email: String,
-  password: String,
-});
+import User from "@packages/db/models/user";
+import passwordHash from "@packages/utils/passwordHash";
 
 const bodySchema = z.object({
   email: z.string().email(),
@@ -12,14 +8,19 @@ const bodySchema = z.object({
 });
 
 export default eventHandler(async (event) => {
-  const { email, password } = await readValidatedBody(event, bodySchema.parse);
-  const User = model("Users", userSchema);
+  const { email, password: purePassword } = await readValidatedBody(
+    event,
+    bodySchema.parse
+  );
+  const password = passwordHash(purePassword);
   const user = new User({ email, password });
-  const result = await user.collection.findOne({ email: email });
+  console.log("pass", email, password);
+  const result = await user.collection.findOne({ email, password });
   if (result === null) {
-    return event.respondWith(
-      new Response("Wront password or email!", { status: 403 })
-    );
+    setResponseStatus(event, 403);
+    return {
+      error: "Wront password or email!",
+    };
   }
   return { email, password };
 });
